@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotNull;
 import nl.hoogervorst.hc.adapter.rest.incoming.input.QualityOverviewInput;
 import nl.hoogervorst.hc.application.QualityOverviewService;
 import nl.hoogervorst.hc.domain.query.QualityOverviewView;
-import nl.hoogervorst.hc.domain.query.QualityOverviewViewRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.OK;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,12 +38,20 @@ class QualityOverviewControllerTest {
         qualityOverviewController = new QualityOverviewController(qualityOverviewService);
     }
     @Test
-    void givenQualityOverviewExists_whenGetQualityOverviewInvoked_expectServiceToBeInvokedAndResultToBeCorrectlyMapped() {
+    void givenQualityOverviewWithIdExists_whenGetQualityOverviewInvoked_expectServiceToBeInvokedAndResultToBeCorrectlyMapped() {
 
+        when(qualityOverviewService.getQualityOverview(QUALITY_OVERVIEW_IDENTIFIER)).thenReturn(qualityOverviewView());
+
+        ResponseEntity<QualityOverviewView> responseEntity = qualityOverviewController.getQualityOverview(QUALITY_OVERVIEW_IDENTIFIER);
+
+        verify(qualityOverviewService).getQualityOverview(QUALITY_OVERVIEW_IDENTIFIER);
+
+        QualityOverviewView body = responseEntity.getBody();
+        assertThat(body).isNotNull();
     }
 
     @Test
-    void getAllQualityOverview() {
+    void givenQualityOverviewExists_whenGetAllQualityOverviewInvoked_expectServiceToBeInvokedAndResultToBeCorrectlyMapped() {
         when(qualityOverviewService.getAllQualityOverview(any())).thenReturn(pageOfQualityOverviewView());
 
         Pageable pageable = Pageable.unpaged();
@@ -72,7 +80,7 @@ class QualityOverviewControllerTest {
 
         assertThat(captor.getValue()).usingRecursiveComparison().isEqualTo(qualityOverviewInput());
 
-        //assertThat(responseEntity.getStatusCode()).isEqualTo(ACCEPTED);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(ACCEPTED);
     }
     @NotNull
     private static PageImpl<QualityOverviewView> pageOfQualityOverviewView() {
