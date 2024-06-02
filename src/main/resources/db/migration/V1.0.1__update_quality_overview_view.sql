@@ -1,0 +1,4 @@
+ALTER TABLE quality_overview_view
+ADD COLUMN total_amount_of_concepts INTEGER,
+ADD COLUMN total_amount_of_triples INTEGER,
+ADD COLUMN total_amount_of_instruments INTEGER;

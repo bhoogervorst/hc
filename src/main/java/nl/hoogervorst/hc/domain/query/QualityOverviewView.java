@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
@@ -20,5 +19,7 @@ public class QualityOverviewView {
     @Id
     private UUID qualityOverviewId;
     private int totalAmountOfModels;
-
+    private int totalAmountOfConcepts;
+    private int totalAmountOfTriples;
+    private int totalAmountOfInstruments;
 }

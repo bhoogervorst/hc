@@ -14,4 +14,7 @@ import java.util.UUID;
 public class QualityOverviewInput {
     private UUID qualityOverviewId;
     private int totalAmountOfModels;
+    private int totalAmountOfConcepts;
+    private int totalAmountOfTriples;
+    private int totalAmountOfInstruments;
 }
