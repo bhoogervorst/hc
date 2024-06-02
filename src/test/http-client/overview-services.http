@@ -1,0 +1,13 @@
+### Maak een nieuw quality-overview0-view record aan
+POST http://localhost:8081/api/quality-overview
+Content-Type: application/json
+
+{"qualityOverviewId": "ea83361b-f54b-4aa0-9717-026d8d307de5", "totalAmountOfModels": 100}
+
+### Haal een specifiek quality-overview-view item op
+GET http://localhost:8081/api/quality-overview/ea83361b-f54b-4aa0-9717-026d8d307de1
+Content-Type: application/json
+
+### Haal alle quality-overview-view records op
+GET http://localhost:8081/api/quality-overview?page=0&size=10&sort=qualityOverviewId,desc
+Content-Type: application/json
