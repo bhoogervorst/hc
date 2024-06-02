@@ -31,9 +31,6 @@ class QualityOverviewControllerTest {
     private QualityOverviewController qualityOverviewController;
 
     @Mock
-    private QualityOverviewViewRepository qualityOverviewViewRepository;
-
-    @Mock
     private QualityOverviewService qualityOverviewService;
 
     @BeforeEach
@@ -62,8 +59,6 @@ class QualityOverviewControllerTest {
         assertThat(body.getContent())
                 .usingRecursiveFieldByFieldElementComparator()
                 .containsExactly(qualityOverviewView());
-
-        //test
     }
 
     @Test
