@@ -143,5 +143,6 @@
                 <version>3.2.5</version> <!-- Use the latest version available -->
             </plugin>
         </plugins>
+        <finalName>spring-boot-hc</finalName>
     </build>
 </project>
