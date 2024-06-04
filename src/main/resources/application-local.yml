@@ -11,6 +11,13 @@ spring:
     username: postgres
     password: changeme
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/hc
+          jwk-set-uri: ${spring.security.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
   flyway:
     user: postgres
     password: changeme

@@ -19,6 +19,12 @@ import java.util.UUID;
 public class QualityOverviewController {
 
     private final QualityOverviewService qualityOverviewService;
+
+    @GetMapping("/hello")
+    public String tempKeycloackService() {
+        return "Hello keycloack integration";
+    }
+
     @GetMapping("/quality-overview/{qualityOverviewId}")
     public ResponseEntity<QualityOverviewView> getQualityOverview(@PathVariable UUID qualityOverviewId){
 
