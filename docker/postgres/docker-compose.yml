@@ -20,7 +20,7 @@ services:
     ports:
       - 5432:5432
     networks:
-      - postgres
+      - postgres_2
 
   adminer:
     image: adminer
@@ -29,7 +29,7 @@ services:
       - 8080:8080
 
 networks:
-  postgres:
+  postgres_2:
     driver: bridge
   
 volumes:
