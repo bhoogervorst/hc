@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -35,11 +36,9 @@ public class QualityOverviewService {
 
     public QualityOverviewView getQualityOverview(UUID qualityOverviewViewId) {
 
-        if (qualityOverviewViewRepository.findByQualityOverviewId(qualityOverviewViewId).isPresent()) {
-            return qualityOverviewViewRepository.findByQualityOverviewId(qualityOverviewViewId).get();
-        } else {
-            return null;
-        }
+        Optional<QualityOverviewView> optionalQualityOverviewView = qualityOverviewViewRepository.findByQualityOverviewId(qualityOverviewViewId);
+
+        return optionalQualityOverviewView.orElse(null);
     }
 }
 
