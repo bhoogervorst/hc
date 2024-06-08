@@ -41,7 +41,7 @@ public class QualityOverviewController {
     }
 
     @PostMapping("/quality-overview")
-    public ResponseEntity<?> setQualityOverview(@RequestBody QualityOverviewInput qualityOverviewInput){
+    public ResponseEntity<Void> setQualityOverview(@RequestBody QualityOverviewInput qualityOverviewInput){
 
         log.info("Ik kom in de POST!");
 
