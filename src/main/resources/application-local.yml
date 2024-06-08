@@ -21,3 +21,10 @@ spring:
   flyway:
     user: postgres
     password: changeme
+
+jwt:
+  auth:
+    converter:
+      resource-id: alibou-rest-api
+      principle-attribute: preferred_username
+
