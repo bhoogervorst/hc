@@ -21,7 +21,7 @@ public class QualityOverviewController {
     private final QualityOverviewService qualityOverviewService;
 
     @GetMapping("/hello")
-    public String tempKeycloackService() {
+    public String tempKeycloakService() {
         return "Hello keycloack integration";
     }
 
