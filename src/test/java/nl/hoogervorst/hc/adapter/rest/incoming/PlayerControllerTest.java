@@ -2,21 +2,19 @@ package nl.hoogervorst.hc.adapter.rest.incoming;
 
 import nl.hoogervorst.hc.adapter.rest.incoming.input.PlayerInput;
 import nl.hoogervorst.hc.application.PlayerService;
-import nl.hoogervorst.hc.domain.query.PlayerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
-
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.ACCEPTED;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerControllerTest {
@@ -36,10 +34,23 @@ class PlayerControllerTest {
     }
 
     @Test
-    void whenUsernameIsBlank_expectABadRequestError(){
+    void whenSaveIsInvoked_expectAccepted(){
 
-        ResponseEntity responseEntity = playerController.createNewPlayer(playerInputBuilder());
+        ResponseEntity<?> responseEntity = playerController.createNewPlayer(playerInputBuilder());
 
+        assertThat(responseEntity.getStatusCode()).isEqualTo(ACCEPTED);
+    }
+
+    @Test
+    void whenSaveIsInvoke_expectArgumentsToMatch(){
+
+        ResponseEntity<?> responseEntity = playerController.createNewPlayer(playerInputBuilder());
+
+        ArgumentCaptor<PlayerInput> captor = ArgumentCaptor.forClass(PlayerInput.class);
+
+        verify(playerService).createNewPlayer(captor.capture());
+
+        assertThat(captor.getValue()).usingRecursiveComparison().isEqualTo(playerInputBuilder());
         assertThat(responseEntity.getStatusCode()).isEqualTo(ACCEPTED);
     }
 
