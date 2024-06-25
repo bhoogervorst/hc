@@ -20,7 +20,7 @@ public class PlayerController {
     private final PlayerService playerService;
 
 @PostMapping("/player")
-public ResponseEntity createNewPlayer(@Valid @RequestBody PlayerInput playerInput){
+public ResponseEntity<Void> createNewPlayer(@Valid @RequestBody PlayerInput playerInput){
 
     log.info("Do i get the input: {}", playerInput.getLastName());
     playerService.createNewPlayer(playerInput);
