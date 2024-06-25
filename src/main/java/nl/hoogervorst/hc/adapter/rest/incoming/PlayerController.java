@@ -25,7 +25,6 @@ public ResponseEntity<Void> createNewPlayer(@Valid @RequestBody PlayerInput play
     log.info("Do i get the input: {}", playerInput.getLastName());
     playerService.createNewPlayer(playerInput);
 
-
     return ResponseEntity.accepted().build();
 }
 
